@@ -2,7 +2,7 @@
 #include<stdlib.h>
 
 //Function prototypes
-int getSize(FILE *) //Scans input file to find largest vertex to obtain size of adjacency list
+int getSize(FILE *); //Scans input file to find largest vertex to obtain size of adjacency list
 
 int main(int argc, char *argv[])
 {
@@ -35,9 +35,9 @@ int getSize(FILE *input)
         }
     }
 
-    size = numVertex + 1;
+    int size = numVertex + 1;
 
-    rewind(input)
+    rewind(input);
     fclose(input);
     return size;
 }
