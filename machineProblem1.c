@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
 
     //Declare arrays
     ADJ gArr[size];
-    ADJ g2Arr[size];
+    ADJ g2Arr[size]; //I just realized maybe we only need one array since we already have pointers to G and G2
 
     //Initialize arrays
     for(int i = 0; i < size; i++)
