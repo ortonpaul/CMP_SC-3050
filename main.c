@@ -25,17 +25,19 @@ void printGraph(struct Graph* graph);
 
 int main(int argc, char *argv[])
 {
-    struct Graph* graph = createGraph(6);
-    addEdge(graph, 1, 3);
-    addEdge(graph, 3, 4);
-    addEdge(graph, 4, 6);
-    addEdge(graph, 6, 5);
-    addEdge(graph, 5, 4);
-    addEdge(graph, 4, 5);
-    addEdge(graph, 3, 2);
-    addEdge(graph, 3, 5);
-    addEdge(graph, 1, 5);
-    addEdge(graph, 5, 6);
+    int size = 6;
+    struct Graph* graph = createGraph(size);
+
+    FILE *file;
+    file = fopen("input.txt", "r");
+
+    int source[size];
+    int destination[size];
+    for(int i = 0; i < size; i++)
+    {
+        fscanf(file, "%d %d", &source[i], &destination[i]);
+        addEdge(graph, source[i], destination[i]);
+    }
 
     printGraph(graph);
 
