@@ -1,17 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-typedef struct adjList{
-    int G;
-    int G2;
-    int color; //white=1 and black=0
-    struct adjList *next;
-}ADJ;
-
 //Function prototypes
 int getSize(char *); //Scans input file to find largest vertex to obtain size of adjacency list
-ADJ* createG(ADJ[], int, char *);
-void insertG(ADJ**, int);
 
 int main(int argc, char *argv[])
 {
@@ -30,22 +21,6 @@ int main(int argc, char *argv[])
     }
 
     int size = getSize(argv[1]); //Retrieve size of array
-
-    //Declare arrays
-    ADJ gArr[size];
-    ADJ g2Arr[size]; //I just realized maybe we only need one array since we already have pointers to G and G2
-
-    //Initialize arrays
-    for(int i = 0; i < size; i++)
-    {
-        //All colors set to white
-        gArr[i].color = 1;
-        g2Arr[i].color=1;
-
-        //All values set to zero
-        gArr[i].G=0;
-        g2Arr[i].G2=0;
-    }
 
     return 0;
 }
@@ -91,29 +66,3 @@ int getSize(char *filename)
     return size;
 }
 
-ADJ* createG(ADJ gArr[], int size, char *filename)
-{
-    FILE *input = fopen(filename, "r"); //File pointer
-    int vertex1 = 0;
-    int vertex2 = 0;
-
-    for(int i = 1; i < size; i++)
-    {
-        fscanf(input, "%d %d\n", &vertex1, &vertex2);
-        fscanf(input, "%d %d\n", &vertex1, &vertex2);
-        gArr[vertex1].color = 0;
-        if(gArr[vertex2].color == 1)
-        {
-            //insert()
-        }
-    }
-    return gArr;
-}
-
-void insertG(ADJ** head, int data)
-{
-    ADJ* node = (ADJ*)(sizeof(ADJ)); //Allocate node
-    node->G = data; //Insert data
-    node->next=(*head); //Make new node the head
-    (*head) = node; //Head points to new node
-}
