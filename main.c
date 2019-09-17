@@ -1,3 +1,27 @@
+/*
+
+Group Members:
+- Xin Zhang
+- Genevieve Saab
+- Paul Orton
+
+Description:
+1. Get vertices and edges and then create graphs G & G2
+2. Add all edges to G based on input file
+3. Loop through G and add edges to G2 based on:
+    - The edge not already existing on G2
+    - The vertex u does not equal vertex w
+    - An edge connecting u -> v, v -> w
+4. Print G2
+
+Remarks:
+This algorithm will not run in linear time time
+due to the loops that need to be performed
+which prevents it from being run proportionally
+to the input.
+
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -42,7 +66,9 @@ int main(int argc, char *argv[])
 
     struct node *ptr = NULL;
     struct node *ptr2 = NULL;
+    struct node *ptr3 = NULL;
     int u, v, w;
+    int exists = 0;
 
     for (u = 1; u < vertices; u++) {
         if(graph -> adjLists[u] != NULL) {
@@ -54,12 +80,21 @@ int main(int argc, char *argv[])
 
                 while (ptr2) {
                     w = ptr2 -> vertex;
-                        
 
-                        if (u != w) {
-                            addEdge(graph2, u, w);
-                        }
+                    ptr3 = graph2 -> adjLists[u];
+                    
+                    while(ptr3) {
+                         if (ptr3 -> vertex == w) { 
+                            exists = 1; // Saying w already exists on this list
+                         }
 
+                         ptr3 = ptr3 -> next;
+                    }
+
+                    if (u != w && exists == 0) {
+                        addEdge(graph2, u, w);
+                    }
+                    exists = 0;
 
                     ptr2 = ptr2 -> next;
                 }
